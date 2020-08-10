@@ -9,20 +9,28 @@ import {
 
 import OrdersProducts from '@modules/orders/infra/typeorm/entities/OrdersProducts';
 
+@Entity('products')
 class Product {
+  @PrimaryGeneratedColumn('uuid')
   id: string;
 
+  @Column()
   name: string;
 
+  @Column('decimal')
   price: number;
 
+  @Column('int')
   quantity: number;
 
-  order_products: OrdersProducts[];
+  // @OneToMany(() => OrdersProducts, orderProducts => orderProducts.product)
+  orderProducts: OrdersProducts[];
 
-  created_at: Date;
+  @CreateDateColumn({ name: 'created_at' })
+  createdAt: Date;
 
-  updated_at: Date;
+  @UpdateDateColumn({ name: 'updated_at' })
+  updatedAt: Date;
 }
 
 export default Product;
